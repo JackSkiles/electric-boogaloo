@@ -4,56 +4,75 @@ import { connect } from 'react-redux';
 import { title, MOVIE_TITLE } from './components/redux/actions/sceneItActions'
 import MovieCard from './components/movieCard'
 import MovieForm from './components/MovieForm'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import SavedMovies from './components/SavedMovies';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {movies: [],
-    saveMovie: ''}
+    const savedMovies = JSON.parse(localStorage.getItem('savedMovies')) || [];
+    this.state = {
+      movies: [],
+      savedMovies: savedMovies
+    }
   }
 
-handleChange = (e) => {
-  this.props.title(e.target.value);
-}
+  handleChange = (e) => {
+    this.props.title(e.target.value);
+  }
 
-handleOnSubmit = (e) => {
-  e.preventDefault();
-  fetch(this.props.titleValue)
-  .then(res => res.json())
-  .then(data => {
-    console.log(data)
-    this.setState({
-      movies: data.Search
+  handleOnSubmit = (e) => {
+    e.preventDefault();
+    fetch(this.props.titleValue)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data)
+        this.setState({
+          movies: data.Search
+        })
+      })
+  }
+
+  saveMovie = (e) => {
+    console.log(e.target.name)
+    let savedMovie = this.state.movies.find((movie) => {
+      return movie.Title === e.target.name
     })
-  })
-}
+    const newSavedMovies = [...this.state.savedMovies, savedMovie];
+    this.setState({ savedMovies: newSavedMovies })
+    localStorage.setItem('savedMovies', JSON.stringify(newSavedMovies))
+    console.log(localStorage)
+  }
 
-saveMovie = (e) =>{
-  console.log(e.target.name)
-  let savedMovie = this.state.movies.find((movie) => {
-    return movie.Title === e.target.name})
-  this.setState({saveMovie: savedMovie})
-  // localStorage.setItem()
-}
-
-render() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h2>Scene it 2: Electric Boogaloo</h2>
-      </header>
-      <div>
-          <MovieForm handleOnSubmit={this.handleOnSubmit} handleChange={ this.handleChange }/>
-        <div>
-    { this.state.movies.map(movie => {
-      return (
-      <MovieCard  SaveMovie={ this.saveMovie } key={ movie.id } movie={ movie }/>
-      )
-    })}
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <header className="App-header">
+            <h2>Scene it 2: Electric Boogaloo</h2>
+            <Link to="/movieList">Go to watch list</Link>
+            <Switch>
+              <Route path="/" exact>
+                <div>
+                  <MovieForm handleOnSubmit={this.handleOnSubmit} handleChange={this.handleChange} />
+                  <div>
+                    {this.state.movies.map(movie => {
+                      return (
+                        <MovieCard SaveMovie={this.saveMovie} key={movie.id} movie={movie} />
+                      )
+                    })}
+                  </div>
+                </div>
+              </Route>
+            </Switch>
+          </header>
+              <Switch>
+                <Route path="/movieList" component={SavedMovies} /> 
+              </Switch>
         </div>
-      </div>
-    </div>
-  );
-}
+      </Router>
+    );
+  }
 
 }
 
