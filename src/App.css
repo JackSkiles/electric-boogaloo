@@ -13,6 +13,22 @@
   }
 }
 
+.container  {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  width: 20%;
+  background-color: rgb(201, 214, 208);
+  margin: 10px;
+  padding: 10px
+}
+
 .App-header {
   background-color: rgba(167, 231, 167, 0.644);
   min-height: 10vh;

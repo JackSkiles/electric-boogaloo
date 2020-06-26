@@ -45,17 +45,20 @@ class App extends React.Component {
   }
 
   render() {
+    
+
     return (
       <Router>
         <div className="App">
           <header className="App-header">
             <h2>Scene it 2: Electric Boogaloo</h2>
-            <Link to="/movieList">Go to watch list</Link>
+          </header>
             <Switch>
               <Route path="/" exact>
                 <div>
+                  <Link to="/movieList"><h2>Watch List</h2></Link>
                   <MovieForm handleOnSubmit={this.handleOnSubmit} handleChange={this.handleChange} />
-                  <div>
+                  <div className="container">
                     {this.state.movies.map(movie => {
                       return (
                         <MovieCard SaveMovie={this.saveMovie} key={movie.id} movie={movie} />
@@ -65,7 +68,6 @@ class App extends React.Component {
                 </div>
               </Route>
             </Switch>
-          </header>
               <Switch>
                 <Route path="/movieList" component={SavedMovies} /> 
               </Switch>
