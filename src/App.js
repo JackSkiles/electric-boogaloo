@@ -7,6 +7,8 @@ import MovieForm from './components/MovieForm'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import SavedMovies from './components/SavedMovies';
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -21,6 +23,7 @@ class App extends React.Component {
     this.props.title(e.target.value);
   }
 
+  // Takes form data entered and searches api for movies
   handleOnSubmit = (e) => {
     e.preventDefault();
     fetch(this.props.titleValue)
@@ -33,12 +36,17 @@ class App extends React.Component {
       })
   }
 
+  // Takes movie you clicked to save, 
   saveMovie = (e) => {
     console.log(e.target.name)
+    //compares it to other movies in array 
     let savedMovie = this.state.movies.find((movie) => {
       return movie.Title === e.target.name
     })
+    // creates new array,
+    //sets new array value to savedMovies plus new saved movie, 
     const newSavedMovies = [...this.state.savedMovies, savedMovie];
+    //sets state to new saveMovies array.
     this.setState({ savedMovies: newSavedMovies })
     localStorage.setItem('savedMovies', JSON.stringify(newSavedMovies))
     console.log(localStorage)
@@ -51,16 +59,17 @@ class App extends React.Component {
       <Router>
         <div className="App">
           <header className="App-header">
-            <h2>Scene it 2: Electric Boogaloo</h2>
+            <h2>Movie Finder</h2>
           </header>
             <Switch>
               <Route path="/" exact>
-                <div>
-                  <Link to="/movieList"><h2>Watch List</h2></Link>
+                <div className='mainDiv'>
                   <MovieForm handleOnSubmit={this.handleOnSubmit} handleChange={this.handleChange} />
+                  <Link to="/movieList" className="watchLink"><h2 className="watchLinkHeader">Watch List</h2></Link>
                   <div className="container">
                     {this.state.movies.map(movie => {
                       return (
+                        // Maps through movies returned and renders them passing through props.
                         <MovieCard SaveMovie={this.saveMovie} key={movie.id} movie={movie} />
                       )
                     })}

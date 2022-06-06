@@ -33,8 +33,8 @@ export default class SavedMovies extends Component {
             padding: '10px'
         }
         return (
-            <div>
-                <Link to="/"><h2>Main Page</h2></Link>
+            <div className='mainDiv'>
+                <Link to="/" className="watchLink"><h2 className="watchLinkHeader">Main Page</h2></Link>
                { this.state.movieList.map(movie => {
                    return (
                     <div className="movieCard" style={container}>

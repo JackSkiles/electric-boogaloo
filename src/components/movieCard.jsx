@@ -1,5 +1,5 @@
 import React from 'react'
-import SavedMovies from './SavedMovies';
+// import SavedMovies from './SavedMovies';
 
 export default function MovieCard(props) {
     const { movie, SaveMovie} = props;
