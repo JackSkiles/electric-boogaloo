@@ -42,7 +42,7 @@ export default class SavedMovies extends Component {
                         <div style={card}>
                         <h1>{ movie.Title }</h1>
                         <h2>{ movie.Year }</h2>
-                        <img src={ movie.Poster }></img>
+                        <img src={ movie.Poster } alt="savedMovie"></img>
                         <button type="submit" name={movie.name} onClick={() => this.deleteMovie(movie)}>Remove</button>
                         </div>
                     </div>
