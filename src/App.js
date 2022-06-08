@@ -36,7 +36,7 @@ class App extends React.Component {
       })
   }
 
-  // Takes movie you clicked to save, 
+    // Takes movie you clicked to save, 
   saveMovie = (e) => {
     console.log(e.target.name)
     //compares it to other movies in array 
@@ -44,7 +44,7 @@ class App extends React.Component {
       return movie.Title === e.target.name
     })
     // creates new array,
-    //sets new array value to savedMovies plus new saved movie, 
+    // sets new array value to savedMovies plus new saved movie, 
     const newSavedMovies = [...this.state.savedMovies, savedMovie];
     //sets state to new saveMovies array.
     this.setState({ savedMovies: newSavedMovies })
@@ -59,7 +59,7 @@ class App extends React.Component {
       <Router>
         <div className="App">
           <header className="App-header">
-            <h2>Movie Finder</h2>
+            <h2>Movie Catalogue</h2>
           </header>
             <Switch>
               <Route path="/" exact>

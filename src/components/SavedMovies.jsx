@@ -27,7 +27,8 @@ export default class SavedMovies extends Component {
             display: 'flex',
             flexDirection: 'column',
             borderRadius: 'px',
-            width: '20%',
+            width: '30%',
+            minWidth: '200px',
             backgroundColor: 'rgb(201, 214, 208)',
             margin: '10px',
             padding: '10px'

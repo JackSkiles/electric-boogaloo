@@ -80,6 +80,21 @@
   color: #61dafb;
 }
 
+.movieCard
+{
+  width: 100%;
+}
+
+.movieCard > div > h1
+{
+  font-size: 2vh;
+}
+
+.movieCard > div
+{
+  width: 70%;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
