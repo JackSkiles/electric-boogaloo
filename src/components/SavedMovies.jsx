@@ -12,7 +12,7 @@ export default class SavedMovies extends Component {
 
     deleteMovie = (movieToRemove) => {
         const removed = this.state.movieList.filter((movie, index) => {
-            return movie != movieToRemove;
+            return movie !== movieToRemove;
         });
         this.setState({movieList: removed});
         localStorage.setItem('savedMovies', JSON.stringify(removed))

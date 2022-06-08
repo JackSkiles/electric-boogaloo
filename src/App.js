@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import { connect } from 'react-redux';
-import { title, MOVIE_TITLE } from './components/redux/actions/sceneItActions'
+import { title } from './components/redux/actions/sceneItActions'
 import MovieCard from './components/movieCard'
 import MovieForm from './components/MovieForm'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';

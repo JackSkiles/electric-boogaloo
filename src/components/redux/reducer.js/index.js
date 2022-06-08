@@ -10,7 +10,7 @@ function reducer(state = initialState, action){
             return {
                 url: 'https://www.omdbapi.com/?apikey=b43843a0&s=' + action.value
             }
-            break;
+            
         default:
             return state;
     }
